@@ -1,4 +1,7 @@
-FROM nginx:latest
-COPY . /usr/share/nginx/html
-CMD 'docker build -t webserver'
-CMD 'docker run -it --rm -d -p 8080:80 --name web -v ~/site-content:/usr/share/nginx/html nginx'
+From devopsedu/webapp
+RUN rm -rf /var/www/html/*
+ADD website  /var/www/html
+
+#Start apache service
+EXPOSE 80
+CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
